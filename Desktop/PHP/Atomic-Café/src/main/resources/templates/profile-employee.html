@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Funcionário - Atomic Café</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <span>Atomic Café</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="admin.html" class="nav-link">Administração</a></li>
+                </ul>
+                <div class="user-profile-icon">
+                    <button class="profile-toggle" id="profileToggle" title="Seu Perfil">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-header" id="profileHeader">
+                            <p id="userName">Usuário</p>
+                        </div>
+                        <a href="profile-employee.html" class="dropdown-item active">
+                            <i class="fas fa-id-card"></i> Meu Perfil
+                        </a>
+                        <a href="Login.html" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-hero">
+            <div class="container">
+                <h1>Meu Perfil - Funcionário</h1>
+                <p>Gerencie suas informações, horários e expedientes</p>
+            </div>
+        </section>
+
+        <section class="profile-content">
+            <div class="container profile-layout">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="profile-name" id="profileName">João Silva</div>
+                    <div class="profile-type">Funcionário</div>
+                    <nav class="profile-menu">
+                        <a href="#" class="profile-menu-item active" data-section="info">
+                            <i class="fas fa-user"></i>
+                            <span>Informações</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="schedule">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Calendário</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="timesheet">
+                            <i class="fas fa-clock"></i>
+                            <span>Ponto</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="salary">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Salário</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="profile-main">
+                    <!-- Informações -->
+                    <section id="info-section" class="profile-section active">
+                        <h2>Informações do Funcionário</h2>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-user"></i>
+                                    Nome
+                                </div>
+                                <div class="info-value" id="empName">-</div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-envelope"></i>
+                                    Email
+                                </div>
+                                <div class="info-value" id="empEmail">-</div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-briefcase"></i>
+                                    Departamento
+                                </div>
+                                <div class="info-value" id="empDepartment">-</div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-clock"></i>
+                                    Horário de Trabalho
+                                </div>
+                                <div class="info-value" id="empSchedule">-</div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-calendar"></i>
+                                    Data de Início
+                                </div>
+                                <div class="info-value" id="empStartDate">-</div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-label">
+                                    <i class="fas fa-user-check"></i>
+                                    Status
+                                </div>
+                                <div class="info-value status-active" id="empStatus">Ativo</div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h3>Informações de Contacto</h3>
+                            <form id="empInfoForm" class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="empPhone" class="form-label">
+                                            <i class="fas fa-phone"></i>
+                                            Telefone
+                                        </label>
+                                        <input type="tel" id="empPhone" class="form-input" placeholder="(11) 99999-9999">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="empPassword" class="form-label">
+                                            <i class="fas fa-lock"></i>
+                                            Nova Senha
+                                        </label>
+                                        <input type="password" id="empPassword" class="form-input" placeholder="Deixe em branco para não alterar">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-login">
+                                    <i class="fas fa-save"></i>
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+
+                    <!-- Calendário -->
+                    <section id="schedule-section" class="profile-section">
+                        <h2>Calendário de Férias, Folgas e Eventos</h2>
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                                <h3 id="currentMonth">Setembro 2026</h3>
+                                <button id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div id="calendar" class="calendar-grid"></div>
+                        </div>
+
+                        <div class="schedule-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: #ff4757;"></span>
+                                Férias
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: #ffa502;"></span>
+                                Folga
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: #5352ed;"></span>
+                                Reunião
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: #2ed573;"></span>
+                                Hoje
+                            </div>
+                        </div>
+
+                        <div class="schedule-events">
+                            <h3>Próximos Eventos</h3>
+                            <div id="upcomingEvents" class="events-list">
+                                <p class="empty-state">Nenhum evento programado.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Ponto -->
+                    <section id="timesheet-section" class="profile-section">
+                        <h2>Registro de Ponto</h2>
+                        <div class="timesheet-container">
+                            <div class="timesheet-current">
+                                <div class="clock-card">
+                                    <div class="clock-time" id="currentTime">--:--:--</div>
+                                    <div class="clock-date" id="currentDate">--/--/----</div>
+                                </div>
+                                <div class="timesheet-buttons">
+                                    <button type="button" class="btn btn-primary" id="checkInBtn">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        Entrada
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="checkOutBtn">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Saída
+                                    </button>
+                                </div>
+                            </div>
+
+                            <h3>Histórico de Ponto</h3>
+                            <div id="timesheetHistory" class="timesheet-history">
+                                <p class="empty-state">Nenhum registro de ponto.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Salário -->
+                    <section id="salary-section" class="profile-section">
+                        <h2>Informações de Salário</h2>
+                        <div class="salary-container">
+                            <div class="salary-card">
+                                <div class="salary-header">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Salário Mensal</span>
+                                </div>
+                                <div class="salary-amount" id="baseSalary">R$ 0,00</div>
+                            </div>
+
+                            <div class="salary-details">
+                                <h3>Últimos Salários</h3>
+                                <div id="salaryHistory" class="salary-history">
+                                    <p class="empty-state">Nenhum histórico de salário disponível.</p>
+                                </div>
+                            </div>
+
+                            <div class="salary-info">
+                                <p><strong>Nota:</strong> As informações de salário são confidenciais e não podem ser compartilhadas com clientes.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Atomic Café</h3>
+                    <p>Seu lugar para café premium e energia positiva.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horários</h3>
+                    <p>Segunda - Sexta: 7h às 20h</p>
+                    <p>Sábado: 8h às 18h</p>
+                    <p>Domingo: 9h às 17h</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@atomiccafe.com.br</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua do Café, 123 - São Paulo</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Atomic Café. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>

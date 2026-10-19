@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Atomic Café</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <span>Atomic Café</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="admin.html" class="nav-link">Administração</a></li>
+                </ul>
+                <div class="user-profile-icon">
+                    <button class="profile-toggle" id="profileToggle" title="Seu Perfil">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-header" id="profileHeader">
+                            <p id="userName">Usuário</p>
+                        </div>
+                        <a href="#" id="viewProfileLink" class="dropdown-item">
+                            <i class="fas fa-id-card"></i> Ver Perfil
+                        </a>
+                        <a href="Login.html" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="admin-hero">
+            <div class="container">
+                <h1>Painel Administrativo - Atomic Café</h1>
+                <p>Gerenciar clientes e funcionários</p>
+            </div>
+        </section>
+
+        <section class="admin-content">
+            <div class="container">
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" data-tab="users">
+                        <i class="fas fa-users"></i>
+                        Gerenciar Usuários
+                    </button>
+                    <button class="admin-tab-btn" data-tab="new-user">
+                        <i class="fas fa-user-plus"></i>
+                        Novo Usuário
+                    </button>
+                </div>
+
+                <!-- Lista de Usuários -->
+                <div id="users-tab" class="admin-tab-content active">
+                    <h2>Lista de Usuários</h2>
+                    <div class="filter-bar">
+                        <input type="text" id="searchUsers" class="form-input" placeholder="Pesquisar por nome ou email...">
+                        <select id="filterType" class="form-input">
+                            <option value="">Todos os Tipos</option>
+                            <option value="cliente">Clientes</option>
+                            <option value="funcionario">Funcionários</option>
+                        </select>
+                    </div>
+                    <div id="usersList" class="users-list">
+                        <p class="empty-state">Nenhum usuário registrado.</p>
+                    </div>
+                </div>
+
+                <!-- Criar Novo Usuário -->
+                <div id="new-user-tab" class="admin-tab-content">
+                    <h2>Cadastrar Novo Usuário</h2>
+                    <form id="newUserForm" class="admin-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newUserName" class="form-label">
+                                    <i class="fas fa-user"></i>
+                                    Nome Completo
+                                </label>
+                                <input type="text" id="newUserName" class="form-input" placeholder="Nome completo" required>
+                                <span class="error-message" id="newUserNameError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserEmail" class="form-label">
+                                    <i class="fas fa-envelope"></i>
+                                    Email
+                                </label>
+                                <input type="email" id="newUserEmail" class="form-input" placeholder="email@example.com" required>
+                                <span class="error-message" id="newUserEmailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newUserType" class="form-label">
+                                    <i class="fas fa-user-tie"></i>
+                                    Tipo de Usuário
+                                </label>
+                                <select id="newUserType" class="form-input" required onchange="updateFormFields()">
+                                    <option value="">Selecione...</option>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="funcionario">Funcionário</option>
+                                </select>
+                                <span class="error-message" id="newUserTypeError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserPassword" class="form-label">
+                                    <i class="fas fa-lock"></i>
+                                    Senha
+                                </label>
+                                <input type="password" id="newUserPassword" class="form-input" placeholder="Crie uma senha" required>
+                                <span class="error-message" id="newUserPasswordError"></span>
+                            </div>
+                        </div>
+
+                        <!-- Campos Específicos de Funcionário -->
+                        <div id="employeeFields" style="display: none;">
+                            <h3>Informações do Funcionário</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="employeeDepartment" class="form-label">
+                                        <i class="fas fa-briefcase"></i>
+                                        Departamento
+                                    </label>
+                                    <select id="employeeDepartment" class="form-input">
+                                        <option value="">Selecione...</option>
+                                        <option value="atendimento">Atendimento</option>
+                                        <option value="cozinha">Cozinha</option>
+                                        <option value="gerencia">Gerência</option>
+                                        <option value="limpeza">Limpeza</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="employeeWorkSchedule" class="form-label">
+                                        <i class="fas fa-clock"></i>
+                                        Horário
+                                    </label>
+                                    <input type="text" id="employeeWorkSchedule" class="form-input" placeholder="Ex: 08:00 - 17:00">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="employeeSalary" class="form-label">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    Salário
+                                </label>
+                                <input type="number" id="employeeSalary" class="form-input" placeholder="0.00" step="0.01">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-login">
+                            <i class="fas fa-plus"></i>
+                            Criar Usuário
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Atomic Café</h3>
+                    <p>Seu lugar para café premium e energia positiva.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horários</h3>
+                    <p>Segunda - Sexta: 7h às 20h</p>
+                    <p>Sábado: 8h às 18h</p>
+                    <p>Domingo: 9h às 17h</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@atomiccafe.com.br</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua do Café, 123 - São Paulo</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Atomic Café. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Cliente - Atomic Café</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    <span>Atomic Café</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="Pedidos.html" class="nav-link">Pedidos</a></li>
+                </ul>
+                <div class="user-profile-icon">
+                    <button class="profile-toggle" id="profileToggle" title="Seu Perfil">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+                        <div class="profile-header" id="profileHeader">
+                            <p id="userName">Usuário</p>
+                        </div>
+                        <a href="profile-client.html" class="dropdown-item active">
+                            <i class="fas fa-id-card"></i> Meu Perfil
+                        </a>
+                        <a href="Login.html" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-hero">
+            <div class="container">
+                <h1>Meu Perfil - Cliente</h1>
+                <p>Gerencie suas informações, pedidos e saldo</p>
+            </div>
+        </section>
+
+        <section class="profile-content">
+            <div class="container profile-layout">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-name" id="profileName">João Silva</div>
+                    <div class="profile-type">Cliente</div>
+                    <nav class="profile-menu">
+                        <a href="#" class="profile-menu-item active" data-section="info">
+                            <i class="fas fa-user"></i>
+                            <span>Informações</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Meus Pedidos</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="balance">
+                            <i class="fas fa-wallet"></i>
+                            <span>Saldo e Carteira</span>
+                        </a>
+                        <a href="#" class="profile-menu-item" data-section="bank">
+                            <i class="fas fa-bank"></i>
+                            <span>Contas Bancárias</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="profile-main">
+                    <!-- Informações Pessoais -->
+                    <section id="info-section" class="profile-section active">
+                        <h2>Informações Pessoais</h2>
+                        <form id="infoForm" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="clientName" class="form-label">
+                                        <i class="fas fa-user"></i>
+                                        Nome Completo
+                                    </label>
+                                    <input type="text" id="clientName" class="form-input" placeholder="Seu nome">
+                                    <span class="error-message" id="clientNameError"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="clientEmail" class="form-label">
+                                        <i class="fas fa-envelope"></i>
+                                        Email
+                                    </label>
+                                    <input type="email" id="clientEmail" class="form-input" placeholder="seu.email@example.com">
+                                    <span class="error-message" id="clientEmailError"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="clientPhone" class="form-label">
+                                        <i class="fas fa-phone"></i>
+                                        Telefone
+                                    </label>
+                                    <input type="tel" id="clientPhone" class="form-input" placeholder="(11) 99999-9999">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="clientDate" class="form-label">
+                                        <i class="fas fa-calendar"></i>
+                                        Data de Cadastro
+                                    </label>
+                                    <input type="text" id="clientDate" class="form-input" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clientAddress" class="form-label">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Endereço
+                                </label>
+                                <textarea id="clientAddress" class="form-input textarea-input" rows="3" placeholder="Rua, número, bairro, cidade"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="clientPassword" class="form-label">
+                                    <i class="fas fa-lock"></i>
+                                    Nova Senha (deixe em branco para não alterar)
+                                </label>
+                                <input type="password" id="clientPassword" class="form-input" placeholder="Deixe em branco para não alterar">
+                            </div>
+
+                            <button type="submit" class="btn btn-login">
+                                <i class="fas fa-save"></i>
+                                Salvar Alterações
+                            </button>
+                        </form>
+                    </section>
+
+                    <!-- Meus Pedidos -->
+                    <section id="orders-section" class="profile-section">
+                        <h2>Meus Pedidos</h2>
+                        <div id="clientOrdersList" class="orders-list">
+                            <p class="empty-state">Você ainda não fez nenhum pedido.</p>
+                        </div>
+                    </section>
+
+                    <!-- Saldo e Carteira -->
+                    <section id="balance-section" class="profile-section">
+                        <h2>Saldo e Carteira Digital</h2>
+                        <div class="balance-container">
+                            <div class="balance-card">
+                                <div class="balance-header">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Saldo Disponível</span>
+                                </div>
+                                <div class="balance-amount" id="balanceAmount">R$ 0,00</div>
+                            </div>
+
+                            <div class="balance-actions">
+                                <button type="button" class="btn btn-primary" id="addBalanceBtn">
+                                    <i class="fas fa-plus"></i>
+                                    Adicionar Saldo
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="withdrawBalanceBtn">
+                                    <i class="fas fa-minus"></i>
+                                    Sacar
+                                </button>
+                            </div>
+
+                            <h3>Histórico de Transações</h3>
+                            <div id="balanceHistory" class="balance-history">
+                                <p class="empty-state">Nenhuma transação registrada.</p>
+                            </div>
+                        </div>
+
+                        <!-- Modal para Adicionar Saldo -->
+                        <div id="addBalanceModal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close" id="closeAddModal">&times;</span>
+                                <h3>Adicionar Saldo</h3>
+                                <form id="addBalanceForm">
+                                    <div class="form-group">
+                                        <label for="addAmount" class="form-label">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                            Valor
+                                        </label>
+                                        <input type="number" id="addAmount" class="form-input" placeholder="0.00" step="0.01" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-login">Adicionar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contas Bancárias -->
+                    <section id="bank-section" class="profile-section">
+                        <h2>Contas Bancárias Vinculadas</h2>
+                        <button type="button" class="btn btn-primary" id="addBankBtn">
+                            <i class="fas fa-plus"></i>
+                            Vincular Nova Conta
+                        </button>
+
+                        <div id="bankAccountsList" class="bank-accounts-list">
+                            <p class="empty-state">Nenhuma conta bancária vinculada.</p>
+                        </div>
+
+                        <!-- Modal para Vincular Conta -->
+                        <div id="addBankModal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close" id="closeAddBankModal">&times;</span>
+                                <h3>Vincular Conta Bancária</h3>
+                                <form id="addBankForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="bankName" class="form-label">
+                                                <i class="fas fa-bank"></i>
+                                                Banco
+                                            </label>
+                                            <select id="bankName" class="form-input" required>
+                                                <option value="">Selecione o banco...</option>
+                                                <option value="bb">Banco do Brasil</option>
+                                                <option value="caixa">Caixa Econômica</option>
+                                                <option value="bradesco">Bradesco</option>
+                                                <option value="itau">Itaú</option>
+                                                <option value="santander">Santander</option>
+                                                <option value="nubank">NuBank</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="accountType" class="form-label">
+                                                <i class="fas fa-list"></i>
+                                                Tipo de Conta
+                                            </label>
+                                            <select id="accountType" class="form-input" required>
+                                                <option value="">Selecione...</option>
+                                                <option value="corrente">Conta Corrente</option>
+                                                <option value="poupanca">Conta Poupança</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="agencia" class="form-label">
+                                            <i class="fas fa-code"></i>
+                                            Agência
+                                        </label>
+                                        <input type="text" id="agencia" class="form-input" placeholder="0000-0" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="conta" class="form-label">
+                                            <i class="fas fa-code"></i>
+                                            Conta
+                                        </label>
+                                        <input type="text" id="conta" class="form-input" placeholder="00000-0" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-login">Vincular Conta</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Atomic Café</h3>
+                    <p>Seu lugar para café premium e energia positiva.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horários</h3>
+                    <p>Segunda - Sexta: 7h às 20h</p>
+                    <p>Sábado: 8h às 18h</p>
+                    <p>Domingo: 9h às 17h</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@atomiccafe.com.br</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua do Café, 123 - São Paulo</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Atomic Café. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>
